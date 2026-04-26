@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent><groupId>com.zephyr</groupId><artifactId>zephyr</artifactId><version>1.0.0-SNAPSHOT</version></parent>
+    <artifactId>zephyr-admin</artifactId>
+    <description>Zephyr 聚合启动模块</description>
+    <dependencies>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-auth</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-permission</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-system</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-dict</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-log</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-form</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-extension</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-file</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-job</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-notification</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-monitor</artifactId></dependency>
+        <dependency><groupId>com.zephyr</groupId><artifactId>zephyr-codegen</artifactId></dependency>
+    </dependencies>
+    <build><plugins><plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId></plugin></plugins></build>
+</project>

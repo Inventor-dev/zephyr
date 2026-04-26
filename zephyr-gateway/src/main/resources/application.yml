@@ -1,0 +1,70 @@
+server:
+  port: 7000
+spring:
+  application:
+    name: zephyr-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: zephyr-auth
+          uri: http://localhost:7102
+          predicates:
+            - Path=/api/auth/**,/api/user/**
+        - id: zephyr-permission
+          uri: http://localhost:7103
+          predicates:
+            - Path=/api/role/**,/api/menu/**
+        - id: zephyr-system
+          uri: http://localhost:7101
+          predicates:
+            - Path=/api/org/**,/api/dept/**,/api/endpoint/**
+        - id: zephyr-dict
+          uri: http://localhost:7104
+          predicates:
+            - Path=/api/dict/**
+        - id: zephyr-log
+          uri: http://localhost:7105
+          predicates:
+            - Path=/api/log/**
+        - id: zephyr-monitor
+          uri: http://localhost:7106
+          predicates:
+            - Path=/api/monitor/**
+        - id: zephyr-codegen
+          uri: http://localhost:7107
+          predicates:
+            - Path=/api/codegen/**
+        - id: zephyr-file
+          uri: http://localhost:7108
+          predicates:
+            - Path=/api/file/**
+        - id: zephyr-job
+          uri: http://localhost:7109
+          predicates:
+            - Path=/api/job/**
+        - id: zephyr-notification
+          uri: http://localhost:7110
+          predicates:
+            - Path=/api/notification/**
+        - id: zephyr-form
+          uri: http://localhost:7111
+          predicates:
+            - Path=/api/form/**
+        - id: zephyr-extension
+          uri: http://localhost:7112
+          predicates:
+            - Path=/api/extension/**
+        - id: zephyr-plugin
+          uri: http://localhost:7101
+          predicates:
+            - Path=/api/plugin/**
+  data:
+    redis:
+      host: localhost
+      port: 6379
+sa-token:
+  token-name: Authorization
+  timeout: 7200
+  is-concurrent: true
+  is-share: true
+  token-style: uuid

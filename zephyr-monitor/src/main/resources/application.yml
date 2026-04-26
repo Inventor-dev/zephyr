@@ -1,0 +1,14 @@
+server:
+  port: 7106
+spring:
+  application:
+    name: zephyr-monitor
+  data:
+    redis:
+      host: localhost
+      port: 6379
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
