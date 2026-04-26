@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base Platform Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: #020617;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 40px;
+    min-height: 100vh;
+}
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+.header h1::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #22d3ee;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+.header .subtitle {
+    font-size: 14px;
+    color: #64748b;
+}
+.diagram-card {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+.summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 30px;
+}
+.summary-card {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+}
+.summary-card .value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #22d3ee;
+}
+.summary-card .label {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 4px;
+}
+.footer {
+    text-align: center;
+    font-size: 11px;
+    color: #475569;
+    margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Base Platform Architecture</h1>
+    <div class="subtitle">Spring Boot 4.x + Java 25 + COLA + Qiankun Micro-Frontend | v1.0</div>
+</div>
+
+<div class="diagram-card">
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+    <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+        </pattern>
+        <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+        </marker>
+        <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee"/>
+        </marker>
+        <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#34d399"/>
+        </marker>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1200" height="900" fill="#020617"/>
+    <rect width="1200" height="900" fill="url(#grid)"/>
+
+    <!-- ========== LAYER 1: Client ========== -->
+    <text x="600" y="30" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="600">CLIENT LAYER</text>
+
+    <!-- Browser -->
+    <rect x="380" y="42" width="140" height="50" rx="6" fill="#0f172a"/>
+    <rect x="380" y="42" width="140" height="50" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+    <text x="450" y="64" fill="white" font-size="12" font-weight="600" text-anchor="middle">🌐 Browser</text>
+    <text x="450" y="80" fill="#94a3b8" font-size="9" text-anchor="middle">React 18 + Ant Design 5</text>
+
+    <!-- Mobile -->
+    <rect x="680" y="42" width="140" height="50" rx="6" fill="#0f172a"/>
+    <rect x="680" y="42" width="140" height="50" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+    <text x="750" y="64" fill="white" font-size="12" font-weight="600" text-anchor="middle">📱 Mobile</text>
+    <text x="750" y="80" fill="#94a3b8" font-size="9" text-anchor="middle">H5 / Mini App</text>
+
+    <!-- ========== LAYER 2: Gateway ========== -->
+    <text x="600" y="125" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="600">GATEWAY LAYER</text>
+
+    <!-- Spring Cloud Gateway -->
+    <rect x="340" y="138" width="520" height="55" rx="6" fill="#0f172a"/>
+    <rect x="340" y="138" width="520" height="55" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="600" y="160" fill="white" font-size="13" font-weight="600" text-anchor="middle">🚀 Spring Cloud Gateway 4.x</text>
+    <text x="600" y="178" fill="#94a3b8" font-size="9" text-anchor="middle">路由转发 | 限流熔断 | 日志审计 | 统一鉴权</text>
+
+    <!-- ========== LAYER 3: Main App Shell ========== -->
+    <text x="600" y="222" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="600">FRONTEND SHELL (Qiankun)</text>
+
+    <!-- Main App Shell -->
+    <rect x="240" y="235" width="720" height="65" rx="6" fill="#0f172a"/>
+    <rect x="240" y="235" width="720" height="65" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+    <text x="600" y="258" fill="white" font-size="13" font-weight="600" text-anchor="middle">🏠 Main App Shell (port 7000)</text>
+    <text x="600" y="276" fill="#94a3b8" font-size="9" text-anchor="middle">Layout | Auth | i18n | Dynamic Module Loading | Endpoint Config</text>
+
+    <!-- Sub Apps -->
+    <g transform="translate(260, 315)">
+        <rect x="0" y="0" width="100" height="42" rx="4" fill="#0f172a"/>
+        <rect x="0" y="0" width="100" height="42" rx="4" fill="rgba(8, 51, 68, 0.3)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="50" y="18" fill="#22d3ee" font-size="9" font-weight="600" text-anchor="middle">sub-system</text>
+        <text x="50" y="32" fill="#64748b" font-size="7" text-anchor="middle">7101</text>
+    </g>
+    <g transform="translate(380, 315)">
+        <rect x="0" y="0" width="100" height="42" rx="4" fill="#0f172a"/>
+        <rect x="0" y="0" width="100" height="42" rx="4" fill="rgba(8, 51, 68, 0.3)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="50" y="18" fill="#22d3ee" font-size="9" font-weight="600" text-anchor="middle">sub-permission</text>
+        <text x="50" y="32" fill="#64748b" font-size="7" text-anchor="middle">7103</text>
+    </g>
+    <g transform="translate(500, 315)">
+        <rect x="0" y="0" width="100" height="42" rx="4" fill="#0f172a"/>
+        <rect x="0" y="0" width="100" height="42" rx="4" fill="rgba(8, 51, 68, 0.3)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="50" y="18" fill="#22d3ee" font-size="9" font-weight="600" text-anchor="middle">sub-form</text>
+        <text x="50" y="32" fill="#64748b" font-size="7" text-anchor="middle">7111</text>
+    </g>
+    <g transform="translate(620, 315)">
+        <rect x="0" y="0" width="100" height="42" rx="4" fill="#0f172a"/>
+        <rect x="0" y="0" width="100" height="42" rx="4" fill="rgba(8, 51, 68, 0.3)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="50" y="18" fill="#22d3ee" font-size="9" font-weight="600" text-anchor="middle">sub-dict</text>
+        <text x="50" y="32" fill="#64748b" font-size="7" text-anchor="middle">7104</text>
+    </g>
+    <g transform="translate(740, 315)">
+        <rect x="0" y="0" width="100" height="42" rx="4" fill="#0f172a"/>
+        <rect x="0" y="0" width="100" height="42" rx="4" fill="rgba(8, 51, 68, 0.3)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="50" y="18" fill="#22d3ee" font-size="9" font-weight="600" text-anchor="middle">sub-codegen</text>
+        <text x="50" y="32" fill="#64748b" font-size="7" text-anchor="middle">7107</text>
+    </g>
+
+    <!-- ========== LAYER 4: Backend COLA ========== -->
+    <text x="600" y="395" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="600">BACKEND (COLA Architecture · Java 25 · Spring Boot 4.x)</text>
+
+    <!-- base-admin -->
+    <rect x="200" y="408" width="800" height="48" rx="8" fill="#0f172a"/>
+    <rect x="200" y="408" width="800" height="48" rx="8" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="600" y="430" fill="white" font-size="12" font-weight="600" text-anchor="middle">⚡ base-admin (Spring Boot Application · Port 8080)</text>
+    <text x="600" y="446" fill="#94a3b8" font-size="9" text-anchor="middle">Module Registry | Extension Manager | Sa-Token Auth</text>
+
+    <!-- Adapter Layer -->
+    <rect x="200" y="470" width="800" height="42" rx="6" fill="#0f172a"/>
+    <rect x="200" y="470" width="800" height="42" rx="6" fill="rgba(8, 51, 68, 0.25)" stroke="#22d3ee" stroke-width="1"/>
+    <text x="600" y="488" fill="#22d3ee" font-size="10" font-weight="600" text-anchor="middle">📦 Adapter Layer — Controller | DTO | 参数校验 | 路由</text>
+    <text x="600" y="502" fill="#64748b" font-size="8" text-anchor="middle">base-system-adapter | base-auth-adapter | base-permission-adapter | base-dict-adapter | base-log-adapter</text>
+
+    <!-- App Layer -->
+    <rect x="200" y="522" width="800" height="42" rx="6" fill="#0f172a"/>
+    <rect x="200" y="522" width="800" height="42" rx="6" fill="rgba(6, 78, 59, 0.3)" stroke="#34d399" stroke-width="1"/>
+    <text x="600" y="540" fill="#34d399" font-size="10" font-weight="600" text-anchor="middle">🎯 App Layer — Command | Query | 业务编排 | 事务管理</text>
+    <text x="600" y="554" fill="#64748b" font-size="8" text-anchor="middle">UserAppService | RoleAppService | DictAppService | FormAppService | EndpointAppService</text>
+
+    <!-- Domain Layer -->
+    <rect x="200" y="574" width="800" height="42" rx="6" fill="#0f172a"/>
+    <rect x="200" y="574" width="800" height="42" rx="6" fill="rgba(76, 29, 149, 0.3)" stroke="#a78bfa" stroke-width="1"/>
+    <text x="600" y="592" fill="#a78bfa" font-size="10" font-weight="600" text-anchor="middle">💎 Domain Layer — 领域模型 | 领域服务 | 仓储接口</text>
+    <text x="600" y="606" fill="#64748b" font-size="8" text-anchor="middle">User | Dept | Role | Menu | Dict | Form | Endpoint | ExtensionPoint</text>
+
+    <!-- Infrastructure Layer -->
+    <rect x="200" y="626" width="800" height="42" rx="6" fill="#0f172a"/>
+    <rect x="200" y="626" width="800" height="42" rx="6" fill="rgba(251, 146, 60, 0.2)" stroke="#fb923c" stroke-width="1"/>
+    <text x="600" y="644" fill="#fb923c" font-size="10" font-weight="600" text-anchor="middle">🔌 Infrastructure Layer — 仓储实现 | Mapper | 外部服务 | MQ</text>
+    <text x="600" y="658" fill="#64748b" font-size="8" text-anchor="middle">Fluent-MyBatis Mapper | Redis Cache | File Storage | Message Sender</text>
+
+    <!-- ========== LAYER 5: Storage ========== -->
+    <text x="600" y="695" fill="#94a3b8" font-size="11" text-anchor="middle" font-weight="600">STORAGE LAYER</text>
+
+    <!-- MySQL -->
+    <rect x="300" y="708" width="160" height="55" rx="6" fill="#0f172a"/>
+    <rect x="300" y="708" width="160" height="55" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="380" y="730" fill="white" font-size="12" font-weight="600" text-anchor="middle">🗄️ MySQL 8.0+</text>
+    <text x="380" y="748" fill="#94a3b8" font-size="9" text-anchor="middle">sys_* (14 tables)</text>
+
+    <!-- Redis -->
+    <rect x="520" y="708" width="160" height="55" rx="6" fill="#0f172a"/>
+    <rect x="520" y="708" width="160" height="55" rx="6" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5"/>
+    <text x="600" y="730" fill="white" font-size="12" font-weight="600" text-anchor="middle">⚡ Redis 7.x</text>
+    <text x="600" y="748" fill="#94a3b8" font-size="9" text-anchor="middle">Session | Cache | Dict</text>
+
+    <!-- MinIO -->
+    <rect x="740" y="708" width="160" height="55" rx="6" fill="#0f172a"/>
+    <rect x="740" y="708" width="160" height="55" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="820" y="730" fill="white" font-size="12" font-weight="600" text-anchor="middle">📁 MinIO</text>
+    <text x="820" y="748" fill="#94a3b8" font-size="9" text-anchor="middle">File Storage</text>
+
+    <!-- ========== Arrows ========== -->
+    <!-- Browser → Gateway -->
+    <line x1="450" y1="92" x2="450" y2="138" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="750" y1="92" x2="750" y2="138" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Gateway → Shell -->
+    <line x1="600" y1="193" x2="600" y2="235" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Shell → Sub Apps -->
+    <line x1="450" y1="300" x2="310" y2="315" stroke="#22d3ee" stroke-width="1" marker-end="url(#arrow-cyan)" stroke-dasharray="4,3"/>
+    <line x1="550" y1="300" x2="430" y2="315" stroke="#22d3ee" stroke-width="1" marker-end="url(#arrow-cyan)" stroke-dasharray="4,3"/>
+    <line x1="600" y1="300" x2="550" y2="315" stroke="#22d3ee" stroke-width="1" marker-end="url(#arrow-cyan)" stroke-dasharray="4,3"/>
+    <line x1="650" y1="300" x2="670" y2="315" stroke="#22d3ee" stroke-width="1" marker-end="url(#arrow-cyan)" stroke-dasharray="4,3"/>
+    <line x1="750" y1="300" x2="790" y2="315" stroke="#22d3ee" stroke-width="1" marker-end="url(#arrow-cyan)" stroke-dasharray="4,3"/>
+
+    <!-- Sub Apps → Backend -->
+    <line x1="600" y1="357" x2="600" y2="408" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-green)"/>
+
+    <!-- Backend → Storage -->
+    <line x1="450" y1="668" x2="380" y2="708" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="600" y1="668" x2="600" y2="708" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="750" y1="668" x2="820" y2="708" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- ========== Legend ========== -->
+    <g transform="translate(200, 790)">
+        <text x="0" y="0" fill="#94a3b8" font-size="10" font-weight="600">Legend:</text>
+        <rect x="80" y="-10" width="12" height="12" rx="2" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1"/>
+        <text x="96" y="0" fill="#94a3b8" font-size="9">Frontend</text>
+        <rect x="160" y="-10" width="12" height="12" rx="2" fill="rgba(6, 78, 59, 0.3)" stroke="#34d399" stroke-width="1"/>
+        <text x="176" y="0" fill="#94a3b8" font-size="9">App Layer</text>
+        <rect x="250" y="-10" width="12" height="12" rx="2" fill="rgba(76, 29, 149, 0.3)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="266" y="0" fill="#94a3b8" font-size="9">Domain</text>
+        <rect x="330" y="-10" width="12" height="12" rx="2" fill="rgba(251, 146, 60, 0.2)" stroke="#fb923c" stroke-width="1"/>
+        <text x="346" y="0" fill="#94a3b8" font-size="9">Infrastructure</text>
+        <rect x="440" y="-10" width="12" height="12" rx="2" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1"/>
+        <text x="456" y="0" fill="#94a3b8" font-size="9">Gateway</text>
+        <rect x="520" y="-10" width="12" height="12" rx="2" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1"/>
+        <text x="536" y="0" fill="#94a3b8" font-size="9">Security</text>
+    </g>
+</svg>
+</div>
+
+<div class="summary">
+    <div class="summary-card">
+        <div class="value">12</div>
+        <div class="label">后端模块 (COLA)</div>
+    </div>
+    <div class="summary-card">
+        <div class="value" style="color:#34d399">11</div>
+        <div class="label">前端子应用</div>
+    </div>
+    <div class="summary-card">
+        <div class="value" style="color:#a78bfa">14</div>
+        <div class="label">数据库表</div>
+    </div>
+    <div class="summary-card">
+        <div class="value" style="color:#fbbf24">60+</div>
+        <div class="label">API 接口</div>
+    </div>
+</div>
+
+<div class="footer">
+    Generated by 🦞 小龙虾 · Base Platform Architecture · 2026-04-26
+</div>
+
+</body>
+</html>
