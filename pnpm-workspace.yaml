@@ -1,0 +1,11 @@
+packages:
+  - 'zephyr-admin/webapp'
+  - 'zephyr-common/webapp-shared'
+  - 'zephyr-system/webapp'
+  - 'zephyr-permission/webapp'
+  - 'zephyr-dict/webapp'
+  - 'zephyr-log/webapp'
+  - 'zephyr-monitor/webapp'
+  - 'zephyr-codegen/webapp'
+  - 'zephyr-form/webapp'
+  - 'zephyr-extension/webapp'

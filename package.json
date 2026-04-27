@@ -1,5 +1,14 @@
 {
-  "dependencies": {
-    "agent-browser": "^0.26.0"
+  "name": "zephyr",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Zephyr 多模块基础系统",
+  "scripts": {
+    "dev": "pnpm --filter ./zephyr-*/webapp* dev",
+    "build": "pnpm --filter ./zephyr-*/webapp* build"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=9"
   }
 }
