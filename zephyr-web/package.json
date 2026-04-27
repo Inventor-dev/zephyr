@@ -1,0 +1,15 @@
+{
+  "name": "zephyr-web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Zephyr 微前端管理系统",
+  "scripts": {
+    "dev": "pnpm --filter ./packages/* dev",
+    "build": "pnpm --filter ./packages/* build",
+    "clean": "rm -rf node_modules packages/*/node_modules"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=9"
+  }
+}
