@@ -21,16 +21,16 @@
     </licenses>
 
     <properties>
-        <java.version>25</java.version>
-        <maven.compiler.source>25</maven.compiler.source>
-        <maven.compiler.target>25</maven.compiler.target>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Spring Boot -->
         <spring-boot.version>4.0.0</spring-boot.version>
 
         <!-- ORM -->
-        <fluent-mybatis.version>1.6.4</fluent-mybatis.version>
+        <fluent-mybatis.version>1.9.10</fluent-mybatis.version>
 
         <!-- Database -->
         <mysql.version>9.1.0</mysql.version>
@@ -114,9 +114,81 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- 业务模块 -->
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-auth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-permission</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-system</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-dict</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-form</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-extension</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-file</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-job</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-notification</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-monitor</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-codegen</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zephyr</groupId>
+                <artifactId>zephyr-gateway</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- Fluent-MyBatis -->
             <dependency>
-                <groupId>com.github.yingzhuo</groupId>
+                <groupId>com.github.atool</groupId>
                 <artifactId>fluent-mybatis</artifactId>
                 <version>${fluent-mybatis.version}</version>
             </dependency>

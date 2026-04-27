@@ -22,6 +22,7 @@ public class MonitorController {
         MemoryMXBean memory = ManagementFactory.getMemoryMXBean();
         OperatingSystemMXBean os = ManagementFactory.getOperatingSystemMXBean();
 
+        Runtime rt = Runtime.getRuntime();
         Map<String, Object> info = new LinkedHashMap<>();
         info.put("javaVersion", System.getProperty("java.version"));
         info.put("javaHome", System.getProperty("java.home"));
@@ -29,10 +30,10 @@ public class MonitorController {
         info.put("osArch", os.getArch());
         info.put("availableProcessors", os.getAvailableProcessors());
         info.put("uptimeHours", runtime.getUptime() / 3600000);
-        info.put("maxMemoryMB", runtime.maxMemory() / 1048576);
-        info.put("totalMemoryMB", runtime.totalMemory() / 1048576);
-        info.put("freeMemoryMB", runtime.freeMemory() / 1048576);
-        info.put("usedMemoryMB", (runtime.totalMemory() - runtime.freeMemory()) / 1048576);
+        info.put("maxMemoryMB", rt.maxMemory() / 1048576);
+        info.put("totalMemoryMB", rt.totalMemory() / 1048576);
+        info.put("freeMemoryMB", rt.freeMemory() / 1048576);
+        info.put("usedMemoryMB", (rt.totalMemory() - rt.freeMemory()) / 1048576);
         return R.ok(info);
     }
 }
