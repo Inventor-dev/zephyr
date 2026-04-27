@@ -42,6 +42,29 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>install-node-and-pnpm</id>
+                        <goals><goal>install-node-and-pnpm</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>pnpm-install</id>
+                        <goals><goal>pnpm</goal></goals>
+                        <configuration><arguments>install</arguments></configuration>
+                    </execution>
+                    <execution>
+                        <id>pnpm-build</id>
+                        <goals><goal>pnpm</goal></goals>
+                        <configuration><arguments>run build</arguments></configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <workingDirectory>webapp</workingDirectory>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

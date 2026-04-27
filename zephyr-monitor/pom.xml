@@ -3,13 +3,57 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent><groupId>xyz.lemone.zephyr</groupId><artifactId>zephyr</artifactId><version>1.0.0-SNAPSHOT</version></parent>
+
+    <parent>
+        <groupId>xyz.lemone.zephyr</groupId>
+        <artifactId>zephyr</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>zephyr-monitor</artifactId>
     <description>系统监控</description>
+
     <dependencies>
-        <dependency><groupId>xyz.lemone.zephyr</groupId><artifactId>zephyr-common-security</artifactId></dependency>
-        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
-        <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-actuator</artifactId></dependency>
+        <dependency>
+            <groupId>xyz.lemone.zephyr</groupId>
+            <artifactId>zephyr-common-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
     </dependencies>
-    <build><plugins><plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId></plugin></plugins></build>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>install-node-and-pnpm</id>
+                        <goals><goal>install-node-and-pnpm</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>pnpm-install</id>
+                        <goals><goal>pnpm</goal></goals>
+                        <configuration><arguments>install</arguments></configuration>
+                    </execution>
+                    <execution>
+                        <id>pnpm-build</id>
+                        <goals><goal>pnpm</goal></goals>
+                        <configuration><arguments>run build</arguments></configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <workingDirectory>webapp</workingDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
